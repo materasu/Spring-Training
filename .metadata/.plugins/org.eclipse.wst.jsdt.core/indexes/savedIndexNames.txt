@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+C:\Users\Nexwave\Documents\workspace-spring-tool-suite-4-4.3.0.RELEASE\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+612060345.index
+4005976271.index
+2893298873.index
+178931753.index
+524192744.index

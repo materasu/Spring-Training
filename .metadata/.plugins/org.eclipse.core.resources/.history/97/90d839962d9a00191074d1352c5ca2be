@@ -1,0 +1,74 @@
+package com.example.repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+
+import com.example.model.Account;
+import com.example.model.Txn;
+
+@Repository
+@Qualifier("jpa")
+public class JpaAccountRepository implements AccountRepository {
+
+	private static final Logger LOGGER = Logger.getLogger("App");
+
+	@PersistenceContext
+	private EntityManager em;
+	public JpaAccountRepository() {
+		LOGGER.info("JpaAccountRepository created");
+	}
+	
+	@Override
+	public Account load(String accNo) {
+		LOGGER.info("loading account : " + accNo);
+		return em.find(Account.class, accNo);
+	}
+	@Override
+	public Account update(Account account) {
+		//
+		LOGGER.info("updating account : " + account.getAccNo());
+		return em.merge(account);
+	}
+	@Override
+	public void save(Txn txn) {
+		LOGGER.info("Updating Txns Table");
+		em.persist(txn);
+	}
+
+//	@Override
+//	public void save(Txn txn) {
+//		em.persist(txn);
+//	}
+
+	@Override
+	public void add(String accNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(String accNo, double amount) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+//	@Override
+	public <T> List<T> getAll(String str)
+	{
+		List<T> ls = new ArrayList<T>();
+		String sql = "SELECT * FROM "+str;
+		Query query = em.createQuery(sql);
+		ls = query.getResultList();
+		ls.stream().forEach((e)->System.out.println(e));
+		return ls;
+	}
+
+}

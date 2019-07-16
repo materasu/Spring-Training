@@ -1,0 +1,110 @@
+package com.example.repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+
+import com.example.model.Account;
+@Repository("jdbcAccountRepository")
+@Qualifier("jdbc")
+public class JdbcAccountRepository implements AccountRepository {
+
+	private static final Logger LOGGER = Logger.getLogger("App");
+
+	private DataSource dataSource;
+	
+//	private JdbcTemplate jdbcTemplate;
+
+	public JdbcAccountRepository(DataSource dataSource) {
+//		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		this.dataSource = dataSource;
+		LOGGER.info("JdbcAccountRepository created with datasource");
+	}
+	
+	@Override
+	public Account load(String accNum) {
+		LOGGER.info("loading account : " + accNum);
+		Account account = new Account();
+		try {
+			Connection con = dataSource.getConnection();
+			String sql = "select * from Account where accNo=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, accNum);
+
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				account.setAccNo(rs.getString("accno"));
+				account.setAmount(rs.getDouble("amount"));
+			}
+			LOGGER.info(account);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return account;
+	}
+
+	@Override
+	public Account update(Account account) {
+		//
+		LOGGER.info("updating account : " + account.getAccNo());
+
+		try {
+			Connection con = dataSource.getConnection();
+			String sql = "update ACCOUNT set amount=? where accno=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setDouble(1, account.getAmount());
+			ps.setString(2, account.getAccNo());
+
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return account;
+	}
+
+	@Override
+	public void add(String accNo) {
+		Account account = new Account(accNo);
+		try{
+			Connection con = dataSource.getConnection();
+			String sql = "Insert Into Account (accno) values(?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, account.getAccNo());
+			
+			ps.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		LOGGER.info("Account created with accNo = "+accNo);
+	}
+
+	@Override
+	public void add(String accNo, double amount) {
+		Account account = new Account(accNo,amount);
+		try{
+			Connection con = dataSource.getConnection();
+			String sql = "Insert Into Account (accno,amount) values(?,?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, account.getAccNo());
+			ps.setDouble(2, account.getAmount());
+			ps.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		LOGGER.info("Account created with accNo = "+accNo+" with amount = "+amount);
+	}
+
+}

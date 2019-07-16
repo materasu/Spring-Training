@@ -1,0 +1,14 @@
+127.0.0.1 - - [01/Jul/2019:08:59:05 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [01/Jul/2019:08:59:05 +0530] "GET /Account_Full_Kiran/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [01/Jul/2019:08:59:05 +0530] "GET /Account_Full_Kiran/css/bootstrap.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [01/Jul/2019:08:59:08 +0530] "GET /Account_Full_Kiran/statement.htm HTTP/1.1" 404 1110
+127.0.0.1 - - [01/Jul/2019:09:01:25 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [01/Jul/2019:09:01:26 +0530] "GET /Account_Kiran/ HTTP/1.1" 200 526
+0:0:0:0:0:0:0:1 - - [01/Jul/2019:09:01:26 +0530] "GET /Account_Kiran/css/bootstrap.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [01/Jul/2019:09:01:28 +0530] "GET /Account_Kiran/statement.htm HTTP/1.1" 200 6741
+127.0.0.1 - - [01/Jul/2019:09:13:16 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [01/Jul/2019:09:13:16 +0530] "GET /Account_Full_Kiran/WEB-INF/classes/application.properties HTTP/1.1" 404 1047
+127.0.0.1 - - [01/Jul/2019:10:50:26 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [01/Jul/2019:10:50:27 +0530] "GET /Account_Full_Kiran/WEB-INF/classes/com/example/app/App1.java HTTP/1.1" 404 1047
+127.0.0.1 - - [01/Jul/2019:13:29:45 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [01/Jul/2019:13:29:45 +0530] "GET /Account_Full_Kiran/WEB-INF/classes/com/example/config/AccountServiceConfiguration.java HTTP/1.1" 404 1047

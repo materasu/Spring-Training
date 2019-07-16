@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
+<html>
+<head>
+<style>
+tr {
+  text-align: bottom;
+}
+</style>
+<meta charset="UTF-8">
+<title>account service</title>
+<link href="css/bootstrap.css" rel="stylesheet">
+</head>
+<body class="container">
+	<hr />
+	<h1>Account Service - v10</h1>
+	<hr />
+
+	<nav>
+		<ul class="nav nav-pills">
+			<li class="nav-item"><a class="nav-link" href="intro.htm">Intro</a></li>
+			<li class="nav-item"><a class="nav-link" href="txr.htm">Transfer</a></li>
+			<li class="nav-item"><a class="nav-link" href="statement.htm">Statement</a></li>
+		</ul>
+	</nav>
+
+
+
+<h4> List of Transactions Conducted</h4>
+<table class="table">
+	<tr>
+	<th>ID</th>
+	<th> Account Number </th>
+	<th>Amount</th>
+	<th> Closing Balance </th>
+	<th> Transaction Type </th>
+	</tr>
+    <c:forEach var="listValue" items="${lists}">
+    <tr>
+        <td>${listValue.id} </td> 
+        <td>${listValue.account.accNo }
+        <td>${listValue.amount} </td> 
+        <td>${listValue.closingAmount} </td> 
+        <td>${listValue.txnType} </td>
+     </tr>
+    </c:forEach>
+    
+  
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
